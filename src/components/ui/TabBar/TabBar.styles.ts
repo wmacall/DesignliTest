@@ -5,7 +5,7 @@ import {resize} from '../../../utils';
 export default StyleSheet.create({
   container: {
     width: '100%',
-    backgroundColor: COLORS.PRIMARY,
+    backgroundColor: COLORS.WHITE,
     height: resize.scaleHeight(78),
     flexDirection: 'row',
     borderTopColor: COLORS.LIGHT_ORANGE,

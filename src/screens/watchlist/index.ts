@@ -1,1 +1,1 @@
-export * from './watchlist.screen';
+export {default as WatchlistScreen} from './watchlist.screen';

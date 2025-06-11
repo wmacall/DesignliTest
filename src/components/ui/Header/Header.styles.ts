@@ -33,5 +33,6 @@ export default StyleSheet.create({
     height: resize.scaleHeight(36),
     width: resize.scaleWidth(36),
     position: 'absolute',
+    right: resize.scaleWidth(16),
   },
 });
