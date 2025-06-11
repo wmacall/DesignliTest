@@ -8,6 +8,9 @@ import {RootState} from '../../store';
 import {TabsNavigatorRoutes} from '../../routes';
 import {WatchlistScreenProps} from './watchlist.screen.types';
 import styles from './watchlist.screen.styles';
+import {removeFromWatchlist} from '../../store/watchlist/watchlist.slice';
+import {Dispatch} from 'redux';
+import {StockCard} from '../../components/StockCard';
 
 class WatchlistScreen extends Component<WatchlistScreenProps> {
   handleNavigateToAddStock = () => {
@@ -16,7 +19,7 @@ class WatchlistScreen extends Component<WatchlistScreenProps> {
   };
 
   render() {
-    const {stocks} = this.props;
+    const {stocks, handleRemoveStock} = this.props;
 
     return (
       <View style={styles.container}>
@@ -29,11 +32,9 @@ class WatchlistScreen extends Component<WatchlistScreenProps> {
           <FlatList
             data={stocks}
             keyExtractor={item => item.symbol}
+            contentContainerStyle={styles.listContent}
             renderItem={({item}) => (
-              <View style={styles.stockItem}>
-                <Text style={styles.stockSymbol}>{item.symbol}</Text>
-                <Text style={styles.displayName}>{item.displaySymbol}</Text>
-              </View>
+              <StockCard {...item} onPressRemove={handleRemoveStock} />
             )}
             ListEmptyComponent={
               <Text style={styles.emptyListText}>
@@ -51,4 +52,8 @@ const mapStateToProps = ({watchlist}: RootState) => ({
   stocks: watchlist.stocks || [],
 });
 
-export default connect(mapStateToProps)(WatchlistScreen);
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  handleRemoveStock: (symbol: string) => dispatch(removeFromWatchlist(symbol)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(WatchlistScreen);

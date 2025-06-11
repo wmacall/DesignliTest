@@ -17,18 +17,8 @@ export default StyleSheet.create({
     color: COLORS.LAVENDER,
     paddingVertical: resize.scaleHeight(32),
   },
-  stockItem: {
-    paddingVertical: resize.scaleHeight(12),
-    borderBottomWidth: 1,
-    borderBottomColor: COLORS.LAVENDER,
-  },
-  displayName: {
-    fontSize: resize.scaleFont(14),
-    color: COLORS.LAVENDER,
-  },
-  stockSymbol: {
-    fontSize: resize.scaleFont(16),
-    fontWeight: 'bold',
-    color: COLORS.WHITE,
+  listContent: {
+    gap: resize.scaleHeight(8),
+    paddingVertical: resize.scaleHeight(16),
   },
 });

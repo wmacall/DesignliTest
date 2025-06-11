@@ -8,9 +8,14 @@ import {SearchInput} from '../../components/ui/SearchInput';
 import {searchStocks} from '../../data/api/stocks';
 import {Stock} from '../../data/api/stocks/entities/Stock.dto';
 import {mapStockFromApi} from '../../data/api/stocks/adapters/Stock.adapter';
+import {connect} from 'react-redux';
+import {addToWatchlist} from '../../store/watchlist/watchlist.slice';
 import styles from './home.screen.styles';
+import {Dispatch} from 'redux';
 
-interface HomeScreenProps {}
+interface HomeScreenProps {
+  addStockToWatchlist: (stock: Stock) => void;
+}
 interface HomeScreenState {
   searchQuery: string;
   price: string;
@@ -19,7 +24,7 @@ interface HomeScreenState {
 
 let debounceTimeout: NodeJS.Timeout;
 
-export class HomeScreen extends Component<HomeScreenProps, HomeScreenState> {
+class HomeScreen extends Component<HomeScreenProps, HomeScreenState> {
   state: HomeScreenState = {
     searchQuery: '',
     price: '',
@@ -54,7 +59,7 @@ export class HomeScreen extends Component<HomeScreenProps, HomeScreenState> {
   };
 
   handlePressStock = (stock: Stock) => {
-    console.log('Selected stock:', stock);
+    this.props.addStockToWatchlist(stock);
   };
 
   render() {
@@ -90,3 +95,9 @@ export class HomeScreen extends Component<HomeScreenProps, HomeScreenState> {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  addStockToWatchlist: (stock: Stock) => dispatch(addToWatchlist(stock)),
+});
+
+export default connect(null, mapDispatchToProps)(HomeScreen);

@@ -10,4 +10,5 @@ export type HomeScreenNavigationProp = NativeStackNavigationProp<
 export interface WatchlistScreenProps {
   stocks: Stock[];
   navigation: HomeScreenNavigationProp;
+  handleRemoveStock: (symbol: string) => void;
 }
