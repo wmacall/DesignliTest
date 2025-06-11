@@ -8,4 +8,5 @@ export const COLORS = {
   PRIMARY: '#FCFAF7',
   ORANGE: '#96594F',
   LIGHT_ORANGE: '#F2E8E8',
+  GREEN: '#6DB193',
 };

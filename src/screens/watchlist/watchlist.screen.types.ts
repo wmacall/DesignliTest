@@ -1,10 +1,10 @@
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {TabsNavigatorRouter, TabsNavigatorRoutes} from '../../routes';
+import {AppStackRouter, AppStackRoutes} from '../../routes';
 import {WatchListStock} from '../../types';
 
 export type HomeScreenNavigationProp = NativeStackNavigationProp<
-  TabsNavigatorRouter,
-  TabsNavigatorRoutes.WATCH_LIST_SCREEN
+  AppStackRouter,
+  AppStackRoutes.DETAIL_SCREEN
 >;
 
 export interface WatchlistScreenProps {

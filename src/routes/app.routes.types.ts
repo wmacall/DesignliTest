@@ -18,7 +18,7 @@ export type TabsNavigatorRouter = {
 export type AppStackRouter = {
   [AppStackRoutes.TABS_NAVIGATOR]: undefined;
   [AppStackRoutes.DETAIL_SCREEN]: {
-    movieId: number;
+    symbol: string;
   };
 };
 

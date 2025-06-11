@@ -5,7 +5,7 @@ import {PlusCircle} from 'phosphor-react-native';
 import Header from '../../components/ui/Header';
 import {APP_STRINGS} from '../../constants';
 import {RootState} from '../../store';
-import {TabsNavigatorRoutes} from '../../routes';
+import {AppStackRoutes} from '../../routes';
 import {WatchlistScreenProps} from './watchlist.screen.types';
 import styles from './watchlist.screen.styles';
 import {removeFromWatchlist} from '../../store/watchlist/watchlist.slice';
@@ -15,7 +15,14 @@ import {StockCard} from '../../components/StockCard';
 class WatchlistScreen extends Component<WatchlistScreenProps> {
   handleNavigateToAddStock = () => {
     const {navigation} = this.props;
-    navigation.navigate(TabsNavigatorRoutes.HOME_SCREEN);
+    navigation.goBack();
+  };
+
+  handleNavigateToDetail = (symbol: string) => {
+    const {navigation} = this.props;
+    navigation.navigate(AppStackRoutes.DETAIL_SCREEN, {
+      symbol,
+    });
   };
 
   render() {
@@ -34,7 +41,11 @@ class WatchlistScreen extends Component<WatchlistScreenProps> {
             keyExtractor={item => item.stock.symbol}
             contentContainerStyle={styles.listContent}
             renderItem={({item}) => (
-              <StockCard {...item} onPressRemove={handleRemoveStock} />
+              <StockCard
+                {...item}
+                onPressRemove={handleRemoveStock}
+                onPressCard={this.handleNavigateToDetail}
+              />
             )}
             ListEmptyComponent={
               <Text style={styles.emptyListText}>

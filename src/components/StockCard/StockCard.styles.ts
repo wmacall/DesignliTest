@@ -14,6 +14,35 @@ export default StyleSheet.create({
   stockInfo: {
     flexDirection: 'column',
   },
+  stockDetails: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  alertText: {
+    color: COLORS.MAUVE,
+  },
+  priceText: {
+    color: COLORS.MAUVE,
+  },
+  percentageText: {
+    fontSize: 14,
+  },
+  percentagePositive: {
+    color: COLORS.GREEN,
+  },
+  percentageNegative: {
+    color: COLORS.ORANGE,
+  },
+  percentageNeutral: {
+    color: COLORS.LAVENDER,
+  },
+  percentageContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+  },
   stockSymbol: {
     fontSize: resize.scaleFont(16),
     fontWeight: 'bold',
