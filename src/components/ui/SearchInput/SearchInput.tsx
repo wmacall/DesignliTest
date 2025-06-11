@@ -55,7 +55,12 @@ export const SearchInput: FC<SearchInputProps> = ({
         placeholder="Search"
         icon={<MagnifyingGlass color={COLORS.LAVENDER} />}
       />
-      <Animated.View style={[styles.suggestionsContainer, animatedStyle]}>
+      <Animated.View
+        style={[
+          styles.suggestionsContainer,
+          animatedStyle,
+          {zIndex: stocks.length > 0 ? 1 : -1},
+        ]}>
         <ScrollView showsVerticalScrollIndicator={false}>
           {stocks.map((stock, index) => (
             <Pressable

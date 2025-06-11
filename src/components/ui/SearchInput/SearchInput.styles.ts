@@ -12,7 +12,6 @@ export default StyleSheet.create({
     width: '100%',
     position: 'absolute',
     bottom: -resize.scaleHeight(312),
-    zIndex: 1,
     borderRadius: resize.scaleWidth(16),
     overflow: 'hidden',
   },

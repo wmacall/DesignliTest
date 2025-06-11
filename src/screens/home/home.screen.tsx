@@ -66,10 +66,6 @@ class HomeScreen extends Component<HomeScreenProps, HomeScreenState> {
     const {selectedStock, price} = this.state;
     if (selectedStock) {
       addStockToWatchlist(selectedStock, parseFloat(price));
-      Alert.alert(
-        'Success',
-        `Stock ${selectedStock.symbol} added to watchlist at price ${price}.`,
-      );
       this.setState({
         searchQuery: '',
         price: '',

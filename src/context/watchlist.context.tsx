@@ -61,7 +61,6 @@ class WatchlistMarketDataProvider extends Component<Props, State> {
 
     this.socket.addEventListener('message', event => {
       const message = JSON.parse(event.data);
-      console.log('WebSocket message:', message);
       if (message.type === 'trade' && Array.isArray(message.data)) {
         message.data.forEach((trade: any) => {
           this.handleNewTrade(trade.s, trade.p, trade.t);
