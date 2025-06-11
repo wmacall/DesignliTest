@@ -2,21 +2,21 @@ import React, {PureComponent} from 'react';
 import {View, Text, Pressable} from 'react-native';
 import {Trash} from 'phosphor-react-native';
 import {COLORS} from '../../assets';
-import {Stock} from '../../data/api/stocks/entities/Stock.dto';
 import styles from './StockCard.styles';
+import {WatchListStock} from '../../types';
 
-interface StockCardProps extends Stock {
+interface StockCardProps extends WatchListStock {
   onPressRemove: (symbol: string) => void;
 }
 
 export class StockCard extends PureComponent<StockCardProps> {
   handleRemoveStock = () => {
-    const {symbol, onPressRemove} = this.props;
-    onPressRemove(symbol);
+    const {onPressRemove, stock} = this.props;
+    onPressRemove(stock.symbol);
   };
 
   render() {
-    const {symbol, description} = this.props;
+    const {symbol, description} = this.props.stock;
 
     return (
       <View style={styles.stockItem}>

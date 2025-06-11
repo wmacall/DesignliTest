@@ -1,5 +1,5 @@
-import {Stock} from '../../data/api/stocks/entities/Stock.dto';
+import {WatchListStock} from '../../types';
 
 export interface WatchlistState {
-  stocks: Stock[];
+  stocks: WatchListStock[];
 }

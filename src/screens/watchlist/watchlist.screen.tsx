@@ -31,7 +31,7 @@ class WatchlistScreen extends Component<WatchlistScreenProps> {
         <View style={styles.contentContainer}>
           <FlatList
             data={stocks}
-            keyExtractor={item => item.symbol}
+            keyExtractor={item => item.stock.symbol}
             contentContainerStyle={styles.listContent}
             renderItem={({item}) => (
               <StockCard {...item} onPressRemove={handleRemoveStock} />

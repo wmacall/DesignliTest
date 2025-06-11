@@ -1,6 +1,6 @@
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {TabsNavigatorRouter, TabsNavigatorRoutes} from '../../routes';
-import {Stock} from '../../data/api/stocks/entities/Stock.dto';
+import {WatchListStock} from '../../types';
 
 export type HomeScreenNavigationProp = NativeStackNavigationProp<
   TabsNavigatorRouter,
@@ -8,7 +8,7 @@ export type HomeScreenNavigationProp = NativeStackNavigationProp<
 >;
 
 export interface WatchlistScreenProps {
-  stocks: Stock[];
+  stocks: WatchListStock[];
   navigation: HomeScreenNavigationProp;
   handleRemoveStock: (symbol: string) => void;
 }

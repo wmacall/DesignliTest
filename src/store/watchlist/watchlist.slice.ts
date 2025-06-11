@@ -1,7 +1,7 @@
 import {Alert} from 'react-native';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {WatchlistState} from './watchlist.slice.types';
-import {Stock} from '../../data/api/stocks/entities/Stock.dto';
+import {WatchListStock} from '../../types';
 
 const initialState: WatchlistState = {
   stocks: [],
@@ -11,14 +11,15 @@ const watchlistSlice = createSlice({
   name: 'watchlist',
   initialState,
   reducers: {
-    addToWatchlist: (state, action: PayloadAction<Stock>) => {
+    addToWatchlist: (state, action: PayloadAction<WatchListStock>) => {
+      const {stock} = action.payload;
       const isAlreadyAdded = state.stocks.some(
-        stock => stock.symbol === action.payload.symbol,
+        currentStock => currentStock.stock.symbol === stock.symbol,
       );
       if (isAlreadyAdded) {
         Alert.alert(
           'Already in Watchlist',
-          `The stock ${action.payload.symbol} is already in your watchlist.`,
+          `The stock ${stock.symbol} is already in your watchlist.`,
         );
         return;
       }
@@ -26,7 +27,7 @@ const watchlistSlice = createSlice({
     },
     removeFromWatchlist: (state, action: PayloadAction<string>) => {
       state.stocks = state.stocks.filter(
-        stock => stock.symbol !== action.payload,
+        stock => stock.stock.displaySymbol !== action.payload,
       );
     },
   },

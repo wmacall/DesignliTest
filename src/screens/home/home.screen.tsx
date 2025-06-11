@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Alert, Pressable, SafeAreaView, Text, View} from 'react-native';
+import {Alert, SafeAreaView, View} from 'react-native';
 import {CurrencyDollar} from 'phosphor-react-native';
 import {COLORS} from '../../assets';
 import {Input} from '../../components/ui/Input';
@@ -12,15 +12,9 @@ import {connect} from 'react-redux';
 import {addToWatchlist} from '../../store/watchlist/watchlist.slice';
 import styles from './home.screen.styles';
 import {Dispatch} from 'redux';
-
-interface HomeScreenProps {
-  addStockToWatchlist: (stock: Stock) => void;
-}
-interface HomeScreenState {
-  searchQuery: string;
-  price: string;
-  stocks: Stock[];
-}
+import {Button} from '../../components/ui/Button';
+import {APP_STRINGS} from '../../constants';
+import {HomeScreenProps, HomeScreenState} from './home.screen.types';
 
 let debounceTimeout: NodeJS.Timeout;
 
@@ -29,6 +23,7 @@ class HomeScreen extends Component<HomeScreenProps, HomeScreenState> {
     searchQuery: '',
     price: '',
     stocks: [],
+    selectedStock: null,
   };
 
   handleGetStock = async (query: string) => {
@@ -59,15 +54,38 @@ class HomeScreen extends Component<HomeScreenProps, HomeScreenState> {
   };
 
   handlePressStock = (stock: Stock) => {
-    this.props.addStockToWatchlist(stock);
+    this.setState({
+      selectedStock: stock,
+      searchQuery: stock.symbol,
+      stocks: [],
+    });
+  };
+
+  handleAddStockToWatchlist = () => {
+    const {addStockToWatchlist} = this.props;
+    const {selectedStock, price} = this.state;
+    if (selectedStock) {
+      addStockToWatchlist(selectedStock, parseFloat(price));
+      Alert.alert(
+        'Success',
+        `Stock ${selectedStock.symbol} added to watchlist at price ${price}.`,
+      );
+      this.setState({
+        searchQuery: '',
+        price: '',
+        stocks: [],
+        selectedStock: null,
+      });
+    }
   };
 
   render() {
-    const {searchQuery, price, stocks} = this.state;
+    const {searchQuery, price, stocks, selectedStock} = this.state;
+    const isDisabled = !selectedStock || !price;
 
     return (
       <View style={styles.container}>
-        <Header title="Add Alert" />
+        <Header title={APP_STRINGS.ADD_ALERT} />
         <View style={styles.containerContent}>
           <View style={styles.containerInput}>
             <SearchInput
@@ -86,9 +104,11 @@ class HomeScreen extends Component<HomeScreenProps, HomeScreenState> {
             />
           </View>
           <SafeAreaView>
-            <Pressable style={styles.button}>
-              <Text style={styles.buttonText}>Add Alert</Text>
-            </Pressable>
+            <Button
+              onPress={this.handleAddStockToWatchlist}
+              isDisabled={isDisabled}
+              title={APP_STRINGS.ADD_ALERT}
+            />
           </SafeAreaView>
         </View>
       </View>
@@ -97,7 +117,13 @@ class HomeScreen extends Component<HomeScreenProps, HomeScreenState> {
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  addStockToWatchlist: (stock: Stock) => dispatch(addToWatchlist(stock)),
+  addStockToWatchlist: (stock: Stock, price: number) =>
+    dispatch(
+      addToWatchlist({
+        stock,
+        price,
+      }),
+    ),
 });
 
 export default connect(null, mapDispatchToProps)(HomeScreen);
