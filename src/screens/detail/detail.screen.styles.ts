@@ -11,4 +11,10 @@ export default StyleSheet.create({
     paddingHorizontal: resize.scaleWidth(16),
     marginTop: resize.scaleHeight(16),
   },
+  noDataText: {
+    color: COLORS.LAVENDER,
+    fontSize: resize.scaleFont(16),
+    textAlign: 'center',
+    marginBottom: resize.scaleHeight(16),
+  },
 });

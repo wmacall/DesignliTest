@@ -15,6 +15,7 @@ import {Dispatch} from 'redux';
 import {Button} from '../../components/ui/Button';
 import {APP_STRINGS} from '../../constants';
 import {HomeScreenProps, HomeScreenState} from './home.screen.types';
+import notifee, {AuthorizationStatus} from '@notifee/react-native';
 
 let debounceTimeout: NodeJS.Timeout;
 
@@ -74,6 +75,19 @@ class HomeScreen extends Component<HomeScreenProps, HomeScreenState> {
       });
     }
   };
+
+  async requestUserPermission() {
+    const settings = await notifee.requestPermission();
+
+    if (settings.authorizationStatus >= AuthorizationStatus.AUTHORIZED) {
+      console.log('Permission settings:', settings);
+    } else {
+      console.log('User declined permissions');
+    }
+  }
+  componentDidMount(): void {
+    this.requestUserPermission();
+  }
 
   render() {
     const {searchQuery, price, stocks, selectedStock} = this.state;

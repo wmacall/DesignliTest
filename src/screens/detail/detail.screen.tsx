@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ScrollView, View} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 import {LineChart} from 'react-native-wagmi-charts';
 import {StockCard} from '../../components/StockCard';
 import Header from '../../components/ui/Header';
@@ -24,15 +24,22 @@ export default class DetailScreen extends Component<DetailScreenProps> {
       <View style={styles.container}>
         <Header title={`Detail ${symbol}`} showBackButton />
         <ScrollView>
-          <LineChart.Provider data={stockData?.chartData || []}>
-            <LineChart>
-              <LineChart.Path />
-              <LineChart.CursorCrosshair>
-                <LineChart.Tooltip />
-              </LineChart.CursorCrosshair>
-            </LineChart>
-          </LineChart.Provider>
+          {stockData?.chartData ? (
+            <LineChart.Provider data={stockData?.chartData || []}>
+              <LineChart>
+                <LineChart.Path />
+                <LineChart.CursorCrosshair>
+                  <LineChart.Tooltip />
+                </LineChart.CursorCrosshair>
+              </LineChart>
+            </LineChart.Provider>
+          ) : null}
           <View style={styles.containerContent}>
+            {!stockData?.chartData ? (
+              <Text style={styles.noDataText}>
+                No chart data available for {symbol}.
+              </Text>
+            ) : null}
             {currentStock ? (
               <StockCard canDelete={false} {...currentStock} />
             ) : null}
