@@ -6,11 +6,13 @@ import {WatchlistMarketData, WatchListStock} from '../types';
 
 type WatchlistMarketDataContextValue = {
   marketData: WatchlistMarketData[];
+  watchlistStocks: WatchListStock[];
 };
 
 export const WatchlistMarketDataContext =
   createContext<WatchlistMarketDataContextValue>({
     marketData: [],
+    watchlistStocks: [],
   });
 
 type Props = {
@@ -149,7 +151,10 @@ class WatchlistMarketDataProvider extends Component<Props, State> {
   render() {
     return (
       <WatchlistMarketDataContext.Provider
-        value={{marketData: this.state.marketData}}>
+        value={{
+          marketData: this.state.marketData,
+          watchlistStocks: this.props.watchlistStocks,
+        }}>
         {this.props.children}
       </WatchlistMarketDataContext.Provider>
     );
