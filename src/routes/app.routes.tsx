@@ -10,7 +10,7 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import {TabBar} from '../components/ui/TabBar';
-import {HomeScreen} from '../screens';
+import {DetailScreen, HomeScreen, WatchlistScreen} from '../screens';
 
 const AppNavigator = createNativeStackNavigator<AppStackRouter>();
 const TabsNavigator = createBottomTabNavigator<TabsNavigatorRouter>();
@@ -30,7 +30,7 @@ const TabsRoutes = () => (
     />
     <TabsNavigator.Screen
       name={TabsNavigatorRoutes.WATCH_LIST_SCREEN}
-      component={HomeScreen}
+      component={WatchlistScreen}
     />
   </TabsNavigator.Navigator>
 );
@@ -47,7 +47,7 @@ export const AppRoutes = () => (
     />
     <AppNavigator.Screen
       name={AppStackRoutes.DETAIL_SCREEN}
-      component={HomeScreen}
+      component={DetailScreen}
     />
   </AppNavigator.Navigator>
 );
