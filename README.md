@@ -29,9 +29,7 @@ Local push notifications were added using `@notifee/react-native`. Notifications
 
 Real-time stock updates were integrated using the FinHub API. This allows users to receive live updates on stock prices directly within the app.
 
-## Architectural Decisions
-
-### Class Components vs Functional Components
+### Class Components
 
 Most components were refactored to use class-based architecture for better maintainability and scalability. However, some components, such as `Header` and `AuthButton`, were retained as functional components due to library constraints:
 
@@ -45,7 +43,7 @@ Most components were refactored to use class-based architecture for better maint
 Run the following command to install all dependencies:
 
 ```sh
-npm install
+npm install --legacy-peer-deps
 ```
 
 ### Step 2: Start Metro
@@ -78,6 +76,10 @@ Then run:
 ```sh
 npm run ios
 ```
+
+### Splash Screen
+
+The splash screen was implemented using `react-native-bootsplash`.
 
 ### Troubleshooting
 
