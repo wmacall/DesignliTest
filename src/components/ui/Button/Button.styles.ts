@@ -9,7 +9,6 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: resize.scaleHeight(48),
-    marginVertical: resize.scaleHeight(12),
   },
   buttonText: {
     color: COLORS.WHITE,

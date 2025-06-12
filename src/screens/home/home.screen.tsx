@@ -16,6 +16,8 @@ import {Button} from '../../components/ui/Button';
 import {APP_STRINGS} from '../../constants';
 import {HomeScreenProps, HomeScreenState} from './home.screen.types';
 import notifee, {AuthorizationStatus} from '@notifee/react-native';
+import {AuthButton} from '../../components/AuthButton';
+import {UserProfile} from '../../components/UserProfile';
 
 let debounceTimeout: NodeJS.Timeout;
 
@@ -98,6 +100,7 @@ class HomeScreen extends Component<HomeScreenProps, HomeScreenState> {
         <Header title={APP_STRINGS.ADD_ALERT} />
         <View style={styles.containerContent}>
           <View style={styles.containerInput}>
+            <UserProfile />
             <SearchInput
               stocks={stocks}
               onSearchQueryChange={this.handleSearchQueryChange}
@@ -113,7 +116,8 @@ class HomeScreen extends Component<HomeScreenProps, HomeScreenState> {
               icon={<CurrencyDollar color={COLORS.LAVENDER} />}
             />
           </View>
-          <SafeAreaView>
+          <SafeAreaView style={styles.containerButton}>
+            <AuthButton />
             <Button
               onPress={this.handleAddStockToWatchlist}
               isDisabled={isDisabled}

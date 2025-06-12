@@ -16,4 +16,8 @@ export default StyleSheet.create({
     gap: resize.scaleHeight(16),
     marginTop: resize.scaleHeight(16),
   },
+  containerButton: {
+    gap: resize.scaleHeight(16),
+    marginBottom: resize.scaleHeight(16),
+  },
 });
