@@ -1,8 +1,8 @@
 import React, {Component, createContext} from 'react';
-import {Alert} from 'react-native';
 import {connect} from 'react-redux';
 import {RootState} from '../store';
 import {WatchlistMarketData, WatchListStock} from '../types';
+import notifee from '@notifee/react-native';
 
 type WatchlistMarketDataContextValue = {
   marketData: WatchlistMarketData[];
@@ -99,6 +99,20 @@ class WatchlistMarketDataProvider extends Component<Props, State> {
     });
   };
 
+  handleSendNotification = async (symbol: string) => {
+    const channelId = await notifee.createChannel({
+      id: 'default',
+      name: 'Default Channel',
+    });
+    await notifee.displayNotification({
+      title: `Price Alert for ${symbol}`,
+      body: `The price of ${symbol} has exceeded your target price!`,
+      android: {
+        channelId,
+      },
+    });
+  };
+
   handleNewTrade = (symbol: string, price: number, timestampMs: number) => {
     this.lastPrices[symbol] = price;
 
@@ -113,10 +127,7 @@ class WatchlistMarketDataProvider extends Component<Props, State> {
             currentPrice > watchStock.price &&
             !this.alertedSymbols.has(watchStock.stock.symbol)
           ) {
-            Alert.alert(
-              'Price Alert',
-              `${watchStock.stock.description} has exceeded your target price!`,
-            );
+            this.handleSendNotification(watchStock.stock.symbol);
             this.alertedSymbols.add(watchStock.stock.symbol);
           }
 
