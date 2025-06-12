@@ -1,97 +1,84 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# DesignliTest
 
-# Getting Started
+This is a React Native project built using the `@react-native-community/cli`. Below is a list of libraries used in the project and their purposes:
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Libraries Used
 
-## Step 1: Start Metro
+### Dependencies
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+- **@notifee/react-native**: Used for handling local push notifications when stock prices exceed alert thresholds.
+- **@react-native-async-storage/async-storage**: Provides persistent storage for data.
+- **@reduxjs/toolkit**: Simplifies state management with Redux.
+- **axios**: Used for making HTTP requests.
+- **phosphor-react-native**: Provides icon components for React Native.
+- **react-native-reanimated**: Enables animations in React Native.
+- **react-native-wagmi-charts**: Provides charting capabilities.
+- **redux-persist**: Persists Redux state across app reloads.
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+## Challenges Completed
+
+### Auth0 Authentication
+
+Auth0 authentication was successfully integrated into the project. Callback and logout URLs were configured for both iOS and Android platforms. The `AuthButton` component was implemented using the approach recommended by the Auth0 library, as it provides optimal compatibility and functionality.
+
+### Local Push Notifications
+
+Local push notifications were added using `@notifee/react-native`. Notifications are triggered when stock prices exceed user-defined alert thresholds, ensuring timely updates for users.
+
+### Real-Time Stock Updates
+
+Real-time stock updates were integrated using the FinHub API. This allows users to receive live updates on stock prices directly within the app.
+
+## Architectural Decisions
+
+### Class Components vs Functional Components
+
+Most components were refactored to use class-based architecture for better maintainability and scalability. However, some components, such as `Header` and `AuthButton`, were retained as functional components due to library constraints:
+
+- **Header**: Uses `useNavigation` for navigation, as the `withNavigation` HOC was removed from the library and downgrading was not optimal.
+- **AuthButton**: Implemented using the approach recommended by the Auth0 library, which relies on functional components.
+
+## Running the Project
+
+### Step 1: Install Dependencies
+
+Run the following command to install all dependencies:
 
 ```sh
-# Using npm
+npm install
+```
+
+### Step 2: Start Metro
+
+Start the Metro bundler:
+
+```sh
 npm start
-
-# OR using Yarn
-yarn start
 ```
 
-## Step 2: Build and run your app
+### Step 3: Build and Run the App
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
+#### Android
 
 ```sh
-# Using npm
 npm run android
-
-# OR using Yarn
-yarn android
 ```
 
-### iOS
+#### iOS
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+Install CocoaPods dependencies:
 
 ```sh
 bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
 bundle exec pod install
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+Then run:
 
 ```sh
-# Using npm
 npm run ios
-
-# OR using Yarn
-yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+### Troubleshooting
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+Refer to the [React Native Troubleshooting Guide](https://reactnative.dev/docs/troubleshooting) for help.
